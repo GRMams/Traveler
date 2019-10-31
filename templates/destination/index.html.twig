@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Destination index{% endblock %}
+
+{% block body %}
+    <h1>Destination index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nom_de_la_ville</th>
+                <th>Pays</th>
+                <th>Latitude</th>
+                <th>Longitude</th>
+                <th>Id</th>
+                <th>Created</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for destination in destinations %}
+            <tr>
+                <td>{{ destination.nomDeLaVille }}</td>
+                <td>{{ destination.pays }}</td>
+                <td>{{ destination.latitude }}</td>
+                <td>{{ destination.longitude }}</td>
+                <td>{{ destination.id }}</td>
+                <td>{{ destination.created ? destination.created|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('destination_show', {'id': destination.id}) }}">show</a>
+                    <a href="{{ path('destination_edit', {'id': destination.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('destination_new') }}">Create new</a>
+{% endblock %}
